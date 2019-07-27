@@ -2,6 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+namespace: prod
+
 deployment:
   app:
     label: goapp
@@ -13,6 +15,7 @@ deployment:
   db:
     label: mysql
     replicaCount: 1
+    port: 3306
     image:
       name: mysql
       tag: latest
@@ -22,6 +25,16 @@ service:
   type: LoadBalancer
   port: 80
 
+env:
+  db:
+    username: MYSQL_USERNAME
+    pass: MYSQL_PASSWORD
+
+secret:
+  name: db-auth
+  key:
+    username: username
+    pass: password
 
 
 image:

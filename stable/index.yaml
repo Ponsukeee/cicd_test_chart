@@ -3,7 +3,7 @@ entries:
   example:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-07-27T21:32:41.769648+09:00"
+    created: "2019-07-28T00:07:30.398003+09:00"
     description: A Helm chart for Kubernetes
     digest: 739fd89fefc4c64ada2e411b231b165eb619f9fd20830dd70acbfd2f7ad89926
     name: example
@@ -13,20 +13,20 @@ entries:
   helloworld:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-07-27T21:32:41.771204+09:00"
+    created: "2019-07-28T00:07:30.399308+09:00"
     description: A Helm chart for Kubernetes
-    digest: af4548ff08a75c6a5e7131fb773dde0ae32f80b8e98ddb03fcaf81c53f010092
+    digest: 09ebcbcd95a547f8922bdfa035958340babd70bc263f56a1fe5e5761d159e1e2
     name: helloworld
     urls:
     - helloworld-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-07-27T21:32:41.770794+09:00"
+    created: "2019-07-28T00:07:30.398934+09:00"
     description: A Helm chart for Kubernetes
     digest: db31bc94fc51fa63a70a144fb0b2b48b6b316a1dbb0579fd80b8b1e206caae82
     name: helloworld
     urls:
     - helloworld-0.1.0.tgz
     version: 0.1.0
-generated: "2019-07-27T21:32:41.768093+09:00"
+generated: "2019-07-28T00:07:30.39705+09:00"
