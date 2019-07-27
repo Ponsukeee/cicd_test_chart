@@ -28,7 +28,7 @@ service:
 env:
   db:
     username: MYSQL_USERNAME
-    pass: MYSQL_PASSWORD
+    pass: MYSQL_ROOT_PASSWORD
 
 secret:
   name: db-auth
