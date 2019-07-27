@@ -2,7 +2,27 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+deployment:
+  app:
+    label: goapp
+    replicaCount: 3
+    port: 8080
+    image:
+      name: ponz1652/cicd_test
+      tag: latest
+  db:
+    label: mysql
+    replicaCount: 1
+    image:
+      name: mysql
+      tag: latest
+
+service:
+  name: appLoadBalancer
+  type: LoadBalancer
+  port: 80
+
+
 
 image:
   repository: nginx
@@ -13,9 +33,6 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-service:
-  type: ClusterIP
-  port: 80
 
 ingress:
   enabled: false

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: skaffold-deployment
+  name: {{ .Values.deployment.app.label }}
 spec:
-  replicas: 3
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: skaffold-sample
+      app: {{ .Values.deployment.app.label }}
   template:
     metadata:
       labels:
-        app: skaffold-sample
+        app: {{ .Values.deployment.app.label }}
     spec:
       containers:
-        - name: nginx-container
-          image: ponz1652/cicd_test:{{ .Values.image.tag }}
+        - name: {{ .Values.deployment.app.image.name }}
+          image: {{ .Values.deployment.app.image.name }}:{{ .Values.deployment.app.image.tag }}
           ports:
-            - containerPort: 8080
+            - containerPort: {{ .Values.deployment.app.port }}
