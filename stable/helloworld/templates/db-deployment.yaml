@@ -22,10 +22,10 @@ spec:
             - name: {{ .Values.env.db.username }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.secret.name }}
-                  key: {{ .Values.secret.key.username }}
+                  name: {{ .Values.secret.db.name }}
+                  key: {{ .Values.secret.db.key.username }}
             - name: {{ .Values.env.db.pass }}
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.secret.name }}
-                  key: {{ .Values.secret.key.pass }}
+                  name: {{ .Values.secret.db.name }}
+                  key: {{ .Values.secret.db.key.pass }}

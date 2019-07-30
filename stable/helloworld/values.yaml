@@ -21,7 +21,7 @@ deployment:
       tag: latest
 
 service:
-  name: appLoadBalancer
+  name: app-service
   type: LoadBalancer
   port: 80
 
@@ -31,10 +31,13 @@ env:
     pass: MYSQL_ROOT_PASSWORD
 
 secret:
-  name: db-auth
-  key:
-    username: username
-    pass: password
+  db:
+    name: db-auth
+    key:
+      username: username
+      pass: password
+  docker:
+    name: docker-auth
 
 
 image:
