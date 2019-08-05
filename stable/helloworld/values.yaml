@@ -10,7 +10,7 @@ deployment:
     replicaCount: 3
     port: 8080
     image:
-      name: ponz1652/cicd_test
+      name: ponz1652/chatter
       tag: latest
   db:
     label: mysql
@@ -26,9 +26,19 @@ service:
   port: 80
 
 env:
+  app:
+    db:
+      username: DB_USER
+      pass: DB_PASS
   db:
     username: MYSQL_USERNAME
     pass: MYSQL_ROOT_PASSWORD
+
+configmap:
+  app:
+    name: app-config
+    db:
+      dbname: chatter
 
 secret:
   db:

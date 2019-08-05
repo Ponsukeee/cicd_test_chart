@@ -18,5 +18,20 @@ spec:
           image: {{ .Values.deployment.app.image.name }}:{{ .Values.deployment.app.image.tag }}
           ports:
             - containerPort: {{ .Values.deployment.app.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.configmap.app.name }}
+          env:
+            - name: {{ .Values.env.app.db.username }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.db.name }}
+                  key: {{ .Values.secret.db.key.username }}
+            - name: {{ .Values.env.app.db.pass }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.db.name }}
+                  key: {{ .Values.secret.db.key.pass }}
+
       imagePullSecrets:
         - name: {{ .Values.secret.docker.name }}
