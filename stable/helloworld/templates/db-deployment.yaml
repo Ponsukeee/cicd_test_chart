@@ -29,3 +29,17 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secret.db.name }}
                   key: {{ .Values.secret.db.key.pass }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: 
+  labels:
+    app: {{ .Values.deployment.db.label }}
+spec:
+  ports:
+    - port: {{ .Values.deployment.db.port }}
+  selector:
+    app: {{ .Values.deployment.db.label }}
+    tier: {{ .Values.deployment.db.label }}
+  clusterIP: None
