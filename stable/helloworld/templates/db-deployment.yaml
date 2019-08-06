@@ -38,7 +38,7 @@ metadata:
 spec:
   ports:
     - port: {{ .Values.deployment.db.port }}
-      targetport: {{ .Values.deployment.db.port }}
+      targetPort: {{ .Values.deployment.db.port }}
       protocol: TCP
   selector:
     app: {{ .Values.deployment.app.label }}
