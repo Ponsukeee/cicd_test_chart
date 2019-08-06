@@ -6,5 +6,5 @@ data:
   PORT: {{ .Values.deployment.app.port | quote }}
   DBMS: {{ .Values.deployment.db.label | quote }}
   DB_HOST: {{ .Values.deployment.db.label | quote }}
-  DB_PORT: {{ .Values.deployment.db.port |quote }}
+  DB_PORT: {{ .Values.deployment.db.port | quote }}
   DB_NAME: {{ .Values.configmap.app.db.dbname | quote }}
