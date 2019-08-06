@@ -33,7 +33,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: 
+  name: {{ .Values.deployment.db.label }}
   labels:
     app: {{ .Values.deployment.db.label }}
 spec:
