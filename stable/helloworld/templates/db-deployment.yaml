@@ -34,12 +34,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.deployment.db.label }}
-  labels:
-    app: {{ .Values.deployment.db.label }}
+  namespace: {{ .Values.namespace }}
 spec:
   ports:
     - port: {{ .Values.deployment.db.port }}
+      targetport: {{ .Values.deployment.db.port }}
+      protocol: TCP
   selector:
-    app: {{ .Values.deployment.db.label }}
-    tier: {{ .Values.deployment.db.label }}
-  clusterIP: None
+    app: {{ .Values.deployment.app.label }}
