@@ -19,6 +19,11 @@ spec:
           ports:
             - containerPort: {{ .Values.db.container.port }}
           env:
+            - name: {{ .Values.db.env.database }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.app.configMap.name }}
+                  key: {{ .Values.app.configMap.database.key }}
             - name: {{ .Values.db.env.user }}
               valueFrom:
                 secretKeyRef:

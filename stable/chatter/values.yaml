@@ -17,8 +17,12 @@ app:
     port: 80
   configMap:
     name: app-config
-    dbms: mysql
-    database: chatter
+    dbms:
+      value: mysql
+      key: DBMS
+    database:
+      value: chatter
+      key: DB_NAME
   secret:
     name: docker-auth
   env:

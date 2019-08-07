@@ -57,7 +57,7 @@ metadata:
   namespace: {{ .Values.namespace }}
 data:
   PORT: {{ .Values.app.container.port | quote }}
-  DBMS: {{ .Values.app.configMap.dbms | quote }}
+  DBMS: {{ .Values.app.configMap.dbms.value | quote }}
   DB_HOST: {{ .Values.db.label | quote }}
   DB_PORT: {{ .Values.db.service.port | quote }}
-  DB_NAME: {{ .Values.app.configMap.database | quote }}
+  DB_NAME: {{ .Values.app.configMap.database.value | quote }}
