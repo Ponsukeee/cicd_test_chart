@@ -42,7 +42,7 @@ commands:
           name: Create manifest with helm
           command: |
             helm fetch cicd_test_chart/chatter
-            helm template chatter-${CHART_VERSION}.tgz --set app.container.tag=latest > cicd_test_config/helloworld/manifest.yaml
+            helm template chatter-${CHART_VERSION}.tgz --set app.container.tag=${CIRCLE_TAG} > cicd_test_config/helloworld/manifest.yaml
       - run:
           name: Push config repo
           command: |
@@ -51,7 +51,7 @@ commands:
             git commit -m "circleci"
             git push https://github.com/Ponsukeee/cicd_test_config master
 jobs:
-  build:
+#   build:
 #     executor:
 #       name: default
 #     steps:
