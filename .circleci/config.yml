@@ -73,12 +73,12 @@ jobs:
 workflows:
   build_and_update:
     jobs:
-      - build:
-          filters:
-            tags:
-              only: /.*/
-            branches:
-              ignore: /.*/
+      # - build:
+      #     filters:
+      #       tags:
+      #         only: /.*/
+      #       branches:
+      #         ignore: /.*/
       - manifest_update:
           requires:
             - build
