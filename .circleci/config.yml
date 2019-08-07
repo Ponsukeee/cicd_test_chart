@@ -1,13 +1,26 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+executors:
+  default:
+    working_directory: /go/src/github.com/project/gke_test
     docker:
-      - image: circleci/golang:1.9.3
-    working_directory: /go/src/github.com/project/cicd_test
+      - image: circleci/golang:1.11
+commands:
+  build:
     steps:
-      - setup_remote_docker:
-          version: 17.11.0-ce
-      - checkout
+      - run:
+          name: Build
+          command: |
+            docker build -t ${OWNER}/${CIRCLE_PROJECT_REPONAME}:latest -f ./dev/Dockerfile .
+            docker tag ${OWNER}/${CIRCLE_PROJECT_REPONAME}:latest ${OWNER}/${CIRCLE_PROJECT_REPONAME}:${CIRCLE_TAG}
+  push_image:
+    steps:
+      - run:
+          name: Push image to registory
+          command: |
+            docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
+            docker push ${OWNER}/${CIRCLE_PROJECT_REPONAME}
+  manifest_update:
+    steps:
       - run:
           name: Install helm
           command: |
@@ -28,8 +41,8 @@ jobs:
       - run:
           name: Create manifest with helm
           command: |
-            helm fetch cicd_test_chart/helloworld
-            helm template helloworld-${CHART_VERSION}.tgz --set deployment.app.image.tag=latest > cicd_test_config/helloworld/manifest.yaml
+            helm fetch cicd_test_chart/chatter
+            helm template chatter-${CHART_VERSION}.tgz --set app.container.tag=latest > cicd_test_config/helloworld/manifest.yaml
       - run:
           name: Push config repo
           command: |
@@ -37,7 +50,40 @@ jobs:
             git add -A
             git commit -m "circleci"
             git push https://github.com/Ponsukeee/cicd_test_config master
-
-            
-
-      
+jobs:
+  build:
+#     executor:
+#       name: default
+#     steps:
+#       - setup_remote_docker:
+#           version: 17.11.0-ce
+# #      - run:
+# #          command: |
+# #            sudo chown root /usr/bin/docker
+# #            sudo chmod u+s /usr/bin/docker
+#       - checkout
+#       - build
+#       - push_image
+  manifest_update:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - manifest_update
+workflows:
+  build_and_update:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+      - manifest_update:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
