@@ -80,8 +80,8 @@ workflows:
       #       branches:
       #         ignore: /.*/
       - manifest_update:
-          requires:
-            - build
+          # requires:
+          #   - build
           filters:
             tags:
               only: /.*/
