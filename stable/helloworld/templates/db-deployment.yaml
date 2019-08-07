@@ -24,10 +24,11 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secret.db.name }}
                   key: {{ .Values.secret.db.key.username }}
+            - name: {{ .Values.env.db.pass }}
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.secret.db.name }}
-                  key: {{ .Values.secret.db.key.rootUsername }}
+                  key: {{ .Values.secret.db.key.pass }}
             - name: {{ .Values.env.db.rootPass }}
               valueFrom:
                 secretKeyRef:
@@ -46,4 +47,4 @@ spec:
       targetPort: {{ .Values.deployment.db.port }}
       protocol: TCP
   selector:
-    app: {{ .Values.deployment.app.label }}
+    db: {{ .Values.deployment.db.label }}
