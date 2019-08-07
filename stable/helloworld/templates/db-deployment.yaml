@@ -24,12 +24,6 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secret.db.name }}
                   key: {{ .Values.secret.db.key.username }}
-            - name: {{ .Values.env.db.pass }}
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.secret.db.name }}
-                  key: {{ .Values.secret.db.key.pass }}
-            - name: {{ .Values.env.db.rootUsername }}
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.secret.db.name }}

@@ -32,7 +32,6 @@ env:
       pass: DB_PASS
   db:
     username: MYSQL_USERNAME
-    rootUsername: MYSQL_ROOT_USERNAME
     pass: MYSQL_PASSWORD
     rootPass: MYSQL_ROOT_PASSWORD
 
@@ -47,7 +46,6 @@ secret:
     name: db-auth
     key:
       username: username
-      rootUsername: rootUsername
       pass: password
       rootPass: rootPassword
   docker:
