@@ -32,7 +32,9 @@ env:
       pass: DB_PASS
   db:
     username: MYSQL_USERNAME
-    pass: MYSQL_ROOT_PASSWORD
+    rootUsername: MYSQL_ROOT_USERNAME
+    pass: MYSQL_PASSWORD
+    rootPass: MYSQL_ROOT_PASSWORD
 
 configmap:
   app:
@@ -45,7 +47,9 @@ secret:
     name: db-auth
     key:
       username: username
+      rootUsername: rootUsername
       pass: password
+      rootPass: rootPassword
   docker:
     name: docker-auth
 

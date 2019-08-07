@@ -29,6 +29,17 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secret.db.name }}
                   key: {{ .Values.secret.db.key.pass }}
+            - name: {{ .Values.env.db.rootUsername }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.db.name }}
+                  key: {{ .Values.secret.db.key.rootUsername }}
+            - name: {{ .Values.env.db.rootPass }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secret.db.name }}
+                  key: {{ .Values.secret.db.key.rootPass }}
+
 ---
 apiVersion: v1
 kind: Service
