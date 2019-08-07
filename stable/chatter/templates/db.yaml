@@ -14,7 +14,7 @@ spec:
         app: {{ .Values.db.label }}
     spec:
       containers:
-        - name: {{ .Values.db.container.image }}
+        - name: {{ .Values.db.label }}
           image: {{ .Values.db.container.image }}:{{ .Values.db.container.tag }}
           ports:
             - containerPort: {{ .Values.db.container.port }}
