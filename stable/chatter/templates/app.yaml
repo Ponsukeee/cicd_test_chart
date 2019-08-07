@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.label }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.label }}
+    spec:
+      containers:
+        - name: {{ .Values.app.container.iamge }}
+          image: {{ .Values.app.container.image }}:{{ .Values.app.container.tag }}
+          ports:
+            - containerPort: {{ .Values.app.container.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.app.configMap.name }}
+          env:
+            - name: {{ .Values.app.env.user }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret.name }}
+                  key: {{ .Values.db.secret.user }}
+            - name: {{ .Values.app.env.pass }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret.name }}
+                  key: {{ .Values.db.secret.pass }}
+      imagePullSecrets:
+        - name: {{ .Values.app.secret.name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.service.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  type: {{ .Values.app.service.type }}
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: {{ .Values.app.service.port }}
+      targetPort: {{ .Values.app.container.port }}
+  selector:
+    app: {{ .Values.app.label }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.app.configMap.name }}
+  namespace: {{ .Values.namespace }}
+data:
+  PORT: {{ .Values.app.container.port | quote }}
+  DBMS: {{ .Values.app.configMap.dbms | quote }}
+  DB_HOST: {{ .Values.db.label | quote }}
+  DB_PORT: {{ .Values.db.service.port | quote }}
+  DB_NAME: {{ .Values.app.configMap.database | quote }}

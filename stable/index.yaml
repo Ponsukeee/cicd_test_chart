@@ -1,9 +1,19 @@
 apiVersion: v1
 entries:
+  chatter:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2019-08-07T19:29:26.892175+09:00"
+    description: A Helm chart for Kubernetes
+    digest: 3e9d08a01555e1dc0ad2013fc245ba234a924e2b6d979c3489d5414fac5f7d2d
+    name: chatter
+    urls:
+    - chatter-0.1.0.tgz
+    version: 0.1.0
   example:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-07-28T00:07:30.398003+09:00"
+    created: "2019-08-07T19:29:26.893098+09:00"
     description: A Helm chart for Kubernetes
     digest: 739fd89fefc4c64ada2e411b231b165eb619f9fd20830dd70acbfd2f7ad89926
     name: example
@@ -13,20 +23,20 @@ entries:
   helloworld:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-07-28T00:07:30.399308+09:00"
+    created: "2019-08-07T19:29:26.894152+09:00"
     description: A Helm chart for Kubernetes
-    digest: 09ebcbcd95a547f8922bdfa035958340babd70bc263f56a1fe5e5761d159e1e2
+    digest: ad0170117356107eb4ae7da5eda9cfd75997e5e71b7c78f2308a816472735f6b
     name: helloworld
     urls:
     - helloworld-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2019-07-28T00:07:30.398934+09:00"
+    created: "2019-08-07T19:29:26.893897+09:00"
     description: A Helm chart for Kubernetes
     digest: db31bc94fc51fa63a70a144fb0b2b48b6b316a1dbb0579fd80b8b1e206caae82
     name: helloworld
     urls:
     - helloworld-0.1.0.tgz
     version: 0.1.0
-generated: "2019-07-28T00:07:30.39705+09:00"
+generated: "2019-08-07T19:29:26.89175+09:00"

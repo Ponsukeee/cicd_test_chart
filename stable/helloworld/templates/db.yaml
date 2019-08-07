@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.db.label }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.db.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.db.label }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.db.label }}
+    spec:
+      containers:
+        - name: {{ .Values.db.container.image }}
+          image: {{ .Values.db.container.image }}:{{ .Values.db.container.tag }}
+          ports:
+            - containerPort: {{ .Values.db.container.port }}
+          env:
+            - name: {{ .Values.db.env.user }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret.name }}
+                  key: {{ .Values.db.secret.user }}
+            - name: {{ .Values.db.env.pass }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret.name }}
+                  key: {{ .Values.db.secret.pass }}
+            - name: {{ .Values.db.env.rootPass }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.db.secret.name }}
+                  key: {{ .Values.db.secret.rootPass }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.db.label }}
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+    - port: {{ .Values.db.service.port }}
+      targetPort: {{ .Values.db.container.port }}
+      protocol: TCP
+  selector:
+    app: {{ .Values.db.label }}
